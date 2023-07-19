@@ -1,3 +1,3 @@
 export default function Page() {
-  return <>Hello!</>;
+  return <div className="container">Hello!</div>;
 }
