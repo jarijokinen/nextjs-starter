@@ -1,0 +1,22 @@
+* {
+  border: 0;
+  box-sizing: border-box;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: system-ui, sans-serif;
+  font-size: 1.6rem;
+}
+body.noscroll {
+  overflow: hidden;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1140px;
+  padding: 0 30px;
+}
