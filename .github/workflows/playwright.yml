@@ -20,7 +20,11 @@ jobs:
     - name: Run Playwright tests
       run: npx playwright test
       env:
-        BASE_URL: http://localhost:3000
+        BASE_URL: ${{ secrets.BASE_URL }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        GITHUB_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+        GITHUB_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
     - uses: actions/upload-artifact@v3
       if: always()
       with:
