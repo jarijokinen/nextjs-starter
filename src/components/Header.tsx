@@ -1,14 +1,15 @@
 'use client';
 
+import Link from 'next/link';
+import { useState } from 'react';
+
 import styles from './Header.module.scss';
 
-import { useState } from 'react';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+interface IHeaderProps {
+  email: string | undefined | null;
+}
 
-export default function Header() {
-  const { data: session } = useSession();
-
+const Header = ({ email }: IHeaderProps) => {
   const [navOn, setNavOn] = useState(false);
   const navClasses = [styles.nav, navOn ? styles.navOn : ''].join(' ');
 
@@ -27,8 +28,8 @@ export default function Header() {
               <Link href="/protected">Protected Page</Link>
             </li>
             <li>
-              {session?.user ? (
-                <Link href="/api/auth/signout">Sign out</Link>
+              {email ? (
+                <Link href="/api/auth/signout">Sign out ({email})</Link>
               ) : (
                 <Link href="/api/auth/signin">Sign in</Link>
               )}
@@ -42,4 +43,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

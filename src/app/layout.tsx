@@ -1,10 +1,7 @@
 import '@/styles/globals.scss';
 
 import type { Metadata } from 'next';
-
-import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
-import AuthProvider from '@/components/AuthProvider';
+import { getAuthSession } from '@/lib/auth';
 import Header from '@/components/Header';
 
 export const metadata: Metadata = {
@@ -19,15 +16,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
+  const userEmail = session?.user?.email;
 
   return (
     <html lang="en">
       <body>
-        <AuthProvider session={session}>
-          <Header />
-          {children}
-        </AuthProvider>
+        <Header email={userEmail} />
+        {children}
       </body>
     </html>
   );
