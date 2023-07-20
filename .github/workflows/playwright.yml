@@ -31,3 +31,18 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: nextjs
+          POSTGRES_USER: nextjs
+          POSTGRES_PASSWORD: nextjs
+          POSTGRES_PORT: 5432
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
