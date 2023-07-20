@@ -1,11 +1,11 @@
 import '@/styles/globals.scss';
 
 import type { Metadata } from 'next';
+
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
-
+import AuthProvider from '@/components/AuthProvider';
 import Header from '@/components/Header';
-import AuthProvider from '@/app/context/providers';
 
 export const metadata: Metadata = {
   title: {
