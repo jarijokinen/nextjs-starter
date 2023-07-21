@@ -23,7 +23,9 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <Header email={userEmail} />
-        {children}
+        <div className='container'>
+          {children}
+        </div>
       </body>
     </html>
   );

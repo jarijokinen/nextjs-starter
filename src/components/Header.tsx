@@ -2,37 +2,33 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import type { User } from 'next-auth';
 
 import styles from './Header.module.scss';
 
-interface IHeaderProps {
-  email: string | undefined | null;
-}
+type Props = Pick<User, 'email'>;
 
-const Header = ({ email }: IHeaderProps) => {
+const Header = ({ email }: Props) => {
   const [navOn, setNavOn] = useState(false);
   const navClasses = [styles.nav, navOn ? styles.navOn : ''].join(' ');
+
+  const link = (href: string, name: string) => (
+    <Link href={href} onClick={() => setNavOn(false)}>
+      {name}
+    </Link>
+  );
 
   return (
     <header className={styles.header}>
       <div className="container">
-        <div className={styles.logo}>
-          <Link href="/">Next.js Starter</Link>
-        </div>
+        <div className={styles.logo}>{link('/', 'Next.js Starter')}</div>
         <nav className={navClasses}>
           <ul>
+            <li>{link('/', 'Home')}</li>
             <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/protected">Protected Page</Link>
-            </li>
-            <li>
-              {email ? (
-                <Link href="/api/auth/signout">Sign out ({email})</Link>
-              ) : (
-                <Link href="/api/auth/signin">Sign in</Link>
-              )}
+              {email
+                ? link('/api/auth/signout', 'Sign Out')
+                : link('/api/auth/signin', 'Sign In')}
             </li>
           </ul>
           <div
