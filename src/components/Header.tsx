@@ -6,9 +6,12 @@ import type { User } from 'next-auth';
 
 import styles from './Header.module.scss';
 
-type Props = Pick<User, 'email'>;
+interface Props {
+  user?: User;
+}
 
-const Header = ({ email }: Props) => {
+
+const Header = ({ user }: Props) => {
   const [navOn, setNavOn] = useState(false);
   const navClasses = [styles.nav, navOn ? styles.navOn : ''].join(' ');
 
@@ -25,8 +28,9 @@ const Header = ({ email }: Props) => {
         <nav className={navClasses}>
           <ul>
             <li>{link('/', 'Home')}</li>
+            <li>{link('/users', 'Users')}</li>
             <li>
-              {email
+              {user
                 ? link('/api/auth/signout', 'Sign Out')
                 : link('/api/auth/signin', 'Sign In')}
             </li>

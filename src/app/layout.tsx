@@ -17,12 +17,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getAuthSession();
-  const userEmail = session?.user?.email;
 
   return (
     <html lang="en">
       <body>
-        <Header email={userEmail} />
+        <Header user={session?.user} />
         <div className='container'>
           {children}
         </div>
